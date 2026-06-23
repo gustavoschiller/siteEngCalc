@@ -6,6 +6,9 @@
     <meta name="description" content="Site EngCalc">
     <title><?= e(config('site_name')) ?></title>
     <link rel="icon" type="image/png" href="<?= e(asset('img/logos/engcalc-icon-blue.png')) ?>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= e(asset('css/styles.css')) ?>">
 </head>
 <body>
@@ -21,9 +24,16 @@
                 <span class="nav-toggle__line"></span>
             </button>
             <nav class="site-nav" id="site-nav" aria-label="Navegacao principal">
-                <a href="/">Inicio</a>
+                <a class="is-active" href="/">Inicio</a>
+                <a href="/#modules">Modulos</a>
+                <a href="/#pricing">Planos</a>
+                <a href="/#documentation">Documentacao</a>
                 <a href="?page=sobre">Sobre</a>
             </nav>
+            <div class="nav-actions">
+                <a class="nav-actions__ghost" href="?page=sobre">Entrar</a>
+                <a class="nav-actions__primary" href="/#pricing">Teste gratuito</a>
+            </div>
         </div>
     </header>
 

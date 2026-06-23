@@ -14,10 +14,17 @@ manter o historico tecnico do projeto facil de consultar.
 | 2026-06-23 | Instalar PHP portatil em `tools/php/` | Permite rodar o projeto pelo `.bat` sem depender do PATH global do Windows. |
 | 2026-06-23 | Basear o visual no projeto desktop EngCalc | O site deve comunicar a mesma identidade do aplicativo em C++/OpenGL/ImGui. |
 | 2026-06-23 | Usar `Resumo_Projeto.md` como fonte de conteudo | O site deve apresentar os modulos reais do EngCalc, nao textos genericos. |
+| 2026-06-23 | Integrar design system gerado pelo Stitch | O HTML Tailwind foi portado manualmente para PHP/CSS proprio, sem adicionar Tailwind ao projeto. |
+| 2026-06-23 | Refinar fidelidade ao Stitch | Adicionados topbar actions, underline ativo, hero com destaque azul, barras do painel solver, pricing centralizado e footer em colunas. |
+| 2026-06-23 | Adicionar WebGL no painel Sparse Matrix Solver | O container do solver passou a renderizar uma cena 3D com Three.js local, mantendo imagem como fallback. |
+| 2026-06-23 | Corrigir eixo Z invertido no WebGL | A cena Three.js passou a seguir a convencao do EngCalc: X/Y em planta e Z negativo como altura visual. |
+| 2026-06-23 | Corrigir giro desalinhado no WebGL | Removida inclinacao animada do grupo; a perspectiva agora vem da camera com `camera.up=(0,0,-1)` e o modelo gira somente em Z. |
 
 ## Identidade Visual
 
 Origem: `C:\Users\gusta\Desktop\c++\EngCalc\EngCalc\Project1`
+
+Referencia complementar: `C:\Users\gusta\Downloads\stitch_engcalc_design_system\DESIGN.md`
 
 Cores extraidas de `UIEngine.h` e `UIEngineV2.h`:
 
@@ -39,6 +46,7 @@ Componentes traduzidos para o site:
 - Botao primario azul com texto escuro, baseado em `drawPrimaryButton`.
 - Cards escuros compactos com borda/acento no topo, baseados em `drawActionCard` e `buttonModern`.
 - Preview do app com topbar, rail lateral e imagem real do modelo 3D.
+- Blueprint grid, painel "Sparse Matrix Solver", cards de modulos, pricing cards e bloco de documentacao inspirados no `code.html` do Stitch.
 
 ## Conteudo Extraido do Projeto Desktop
 
@@ -68,6 +76,22 @@ Resumo usado no site:
 | 2026-06-23 | Logo horizontal | `public/assets/img/logos/engcalc-logo-horizontal.png` | Lockup horizontal para banners, rodape e apresentacoes. |
 | 2026-06-23 | Icone azul | `public/assets/img/logos/engcalc-icon-blue.png` | Icone de app em fundo azul, usado como favicon. |
 | 2026-06-23 | Simbolo com nome abaixo | `public/assets/img/logos/engcalc-symbol-name-below.png` | Simbolo principal com wordmark original do concept 1 posicionado abaixo. |
+
+## Frontend Interativo
+
+### `initSolverWebgl()`
+
+Arquivo: `public/assets/js/main.js`
+
+Inicializa o canvas `#solver-webgl` dentro do painel "Sparse Matrix Solver".
+Usa Three.js local em `public/assets/vendor/three/three.module.min.js` para
+renderizar uma estrutura 3D simplificada com pilares, vigas, lajes, armaduras e
+grid de referencia. Se WebGL nao carregar, a imagem fallback do painel continua
+visivel.
+
+Convencao obrigatoria: seguir o projeto desktop EngCalc, onde `X/Y` representam
+a planta e `Z` negativo representa "para cima". Evitar implementar cenas novas
+usando `Y` como altura.
 
 ## Dependencias
 
